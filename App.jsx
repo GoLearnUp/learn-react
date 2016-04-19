@@ -2,6 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class App extends React.Component {
+
+  static propTypes = {
+    count: React.PropTypes.number.isRequired
+  }
+
   constructor(props) {
     super(props);
     // Operations usually carried out in componentWillMount go here
