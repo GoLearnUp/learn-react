@@ -11,6 +11,7 @@ export default class TicTacToe extends React.Component {
     super(props);
     this.state = {
       players: ['Jared', 'Scott'],
+      activePlayer: 0,
       spaces: [
         null,null,null,
         null,null,null,
@@ -23,19 +24,40 @@ export default class TicTacToe extends React.Component {
   onSpaceSelect(space, event) {
     event.preventDefault();
     if (typeof space === 'number'){
-      this.state.spaces[space] = 'X';
-      this.setState({spaces: this.state.spaces});
+      this.state.spaces[space] = (this.state.activePlayer === 0 ? 'X' : 'O');
+      this.setState({
+        spaces: this.state.spaces,
+        activePlayer: (this.state.activePlayer === 0 ? 1 : 0),
+      });
     }
   }
 
   render() {
     return <div className="TicTacToe">
+      <div>
+        <TicTacToePlayer name={this.state.players[0]} activePlayer={this.state.activePlayer === 0}/>
+        <TicTacToePlayer name={this.state.players[1]} activePlayer={this.state.activePlayer === 1}/>
+      </div>
       <TicTacToeBoard spaces={this.state.spaces} onSpaceSelect={this.onSpaceSelect} />
     </div>
   }
 }
 
 
+
+class TicTacToePlayer extends React.Component {
+  static propTypes = {
+    name: React.PropTypes.string.isRequired,
+    activePlayer: React.PropTypes.bool.isRequired,
+  }
+  render(){
+    return <div>
+      <span>{this.props.name}</span>
+      &nbsp;
+      <span>{this.props.activePlayer ? 'ACTIVE' : ''}</span>
+    </div>
+  }
+}
 
 class TicTacToeBoard extends React.Component {
   static propTypes = {
