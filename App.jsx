@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TicTacToe from './TicTacToe.jsx';
 
 class App extends React.Component {
-
-  static propTypes = {
-    count: React.PropTypes.number.isRequired
-  }
 
   constructor(props) {
     super(props);
@@ -13,20 +10,11 @@ class App extends React.Component {
     this.state = {
       boosh: 'nozel',
     }
-    this.onClick = this.onClick.bind(this);
-  }
-
-  onClick(){
-    if (this.state.boosh === 'nozel'){
-      this.setState({boosh: 'face'})
-    }else{
-      this.setState({boosh: 'nozel'})
-    }
   }
 
   render() {
     return <div>
-      <button onClick={this.onClick}>{this.state.boosh}</button>
+      <TicTacToe />
     </div>
   }
 }
